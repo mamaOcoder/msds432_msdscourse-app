@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msdscourse-app-deployment
+  labels:
+    app: msdscourse-app
+spec:
+  replicas: 2  # example with 2 replicas
+  selector:
+    matchLabels:
+      app: msdscourse-app
+  template:
+    metadata:
+      labels:
+        app: msdscourse-app
+    spec:
+      containers:
+      - name: msdscourse-app-app
+        image: us-east1-docker.pkg.dev/msds-432-assignment6/msdscourse-repo/msdscourse-app-app:latest  # Replace with your image
+        ports:
+        - containerPort: 8080
+        env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "root"
+        - name: POSTGRES_DB
+          value: "master"
+        - name: POSTGRES_HOST
+          value: "postgres-service" 
