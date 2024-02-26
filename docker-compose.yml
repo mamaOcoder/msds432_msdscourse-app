@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: pg14
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=master
+    volumes:
+      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    networks:
+      - psql
+    ports:
+      - "5433:5432"
+
+  app:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    networks:
+      - psql
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres:
+
+networks:
+  psql:
+    driver: bridge

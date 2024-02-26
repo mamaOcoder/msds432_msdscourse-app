@@ -1,0 +1,5 @@
+MSDS400,Math for Modelers,None
+MSDS420,Database Systems,None
+MSDS431,Data Engineering with Go,None
+MSDS432,Foundations Of Data Engineering,MSDS420
+MSDS434,Analytics Application Engineering,"MSDS400, MSDS420, MSDS432"
